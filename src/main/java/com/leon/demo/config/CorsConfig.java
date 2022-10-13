@@ -14,14 +14,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
+      registry.addMapping("/**")
                 //是否发送Cookie
                 .allowCredentials(true)
                 //放行哪些原始域
                 .allowedOrigins("*")
-                .allowedMethods(new String[]{"GET", "POST", "PUT", "DELETE"})
-                .allowedHeaders("*")
-                .exposedHeaders("*");
+               // .allowedMethods(new String[]{"GET", "POST", "PUT", "DELETE"})
+                .allowedMethods("*")
+                .allowedHeaders("*");
     }
 
 }
