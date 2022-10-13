@@ -17,7 +17,7 @@ import java.util.Map;
 @Slf4j
 public class TestController {
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/test", method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Result test(Integer id) {
         Map map = new HashMap();
