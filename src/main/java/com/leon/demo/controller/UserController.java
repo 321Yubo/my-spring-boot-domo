@@ -15,8 +15,9 @@ import com.leon.demo.DTO.Result;
 import com.leon.demo.entity.SysUser;
 import com.leon.demo.service.UserService;
 import com.leon.demo.util.ResultUtil;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
