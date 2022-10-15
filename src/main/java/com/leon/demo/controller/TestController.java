@@ -7,10 +7,7 @@ import com.leon.demo.entity.Test;
 import com.leon.demo.util.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +19,7 @@ public class TestController {
 
     @RequestMapping(value = "/test", method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
-    public Result test(Test test) {
+    public Result test(@RequestBody Test test) {
         log.info("接受参数{}", JSON.toJSONString(test));
         Map map = new HashMap();
         map.put("1111","qqqq");
