@@ -38,7 +38,10 @@ public class ExpController {
         double growth_rate_kt = Double.parseDouble(runExp.getGrowth_rate_k());
         int cycle_sizet = Integer.parseInt(runExp.getCycle_size());
         testRunExp(growth_rate_kt, cycle_sizet);
-        return getParams();
+        log.info("获取返回值------------------");
+        Map<String, Object> params = getParams();
+        log.info("获取返回值params------------------"+params);
+        return params;
     }
 
     @RequestMapping(value = "/getParams", method = {RequestMethod.POST, RequestMethod.GET})
