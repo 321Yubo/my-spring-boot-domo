@@ -5,6 +5,8 @@ import clojure.lang.LazySeq;
 import clojure.lang.PersistentArrayMap;
 import clojure.lang.Ratio;
 import com.google.common.collect.Lists;
+
+import com.leon.demo.entity.RunExp;
 import com.leon.demo.po.CsvDataSet;
 import com.leon.demo.util.ClojureUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -30,12 +32,11 @@ public class ExpController {
 
     @ResponseBody
     @RequestMapping(value = "runExp", method = {RequestMethod.POST, RequestMethod.GET})
-    public Map<String, Object> runExp(@RequestParam(value = "growth_rate_k", required = true) String growth_rate_k, @RequestParam(value = "cycle_size", required = true) String cycle_size) {
-        log.info("growth_rate_k" + growth_rate_k);
-        log.info("cycle_size" + cycle_size);
-        double growth_rate_kt = Double.parseDouble(growth_rate_k);
-        int cycle_sizet = Integer.parseInt(cycle_size);
-
+    public Map<String, Object> runExp(@RequestBody RunExp runExp) {
+        log.info("获取前端参数growth_rate_k:" + runExp.getGrowth_rate_k());
+        log.info("获取前端参数cycle_size:" + runExp.getCycle_size());
+        double growth_rate_kt = Double.parseDouble(runExp.getGrowth_rate_k());
+        int cycle_sizet = Integer.parseInt(runExp.getCycle_size());
         testRunExp(growth_rate_kt, cycle_sizet);
         return getParams();
     }
