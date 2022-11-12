@@ -22,8 +22,9 @@ public class CsvDataSet {
   }
 
   public static void testRunExp() {
+
     IFn initConfig = ClojureUtil.referClojureFn(cljDemo, "init-config");
-    initConfig.invoke("src/main/resources/arem_all_interleaved.csv");
+    initConfig.invoke(ClojureUtil.arem_all_interleavedFile);
 
     IFn runExp = ClojureUtil.referClojureFn(cljDemo, "run-exp");
     runExp.invoke(0.01,Lists.newArrayList(300));
@@ -31,10 +32,10 @@ public class CsvDataSet {
 
   public static void testRunDemo() {
     IFn initConfig = ClojureUtil.referClojureFn(cljDemo, "init-config");
-    initConfig.invoke("src/main/resources/arem_all_interleaved.csv");
+    initConfig.invoke(ClojureUtil.arem_all_interleavedFile);
 
     IFn makeData = ClojureUtil.referClojureFn(cljDemo, "make-data");
-    makeData.invoke("workspace/arem/logistic-cumulative.edn");
+    makeData.invoke(ClojureUtil.logisticFile);
 
     IFn getAccuracy = ClojureUtil.referClojureFn(cljDemo, "get-accuracy");
     Double accuracy = ((Ratio) getAccuracy.invoke()).doubleValue();

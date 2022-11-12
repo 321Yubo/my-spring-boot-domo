@@ -4,6 +4,7 @@ import clojure.lang.IFn;
 import clojure.lang.LazySeq;
 import clojure.lang.PersistentArrayMap;
 import clojure.lang.Ratio;
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 
 import com.leon.demo.entity.RunExp;
@@ -29,7 +30,23 @@ public class ExpController {
     static {
         ClojureUtil.requireNameSpace(cljDemo);
     }
+    @RequestMapping(value = "runExpWithThreads", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public String runExpWithThreads(@RequestBody RunExp runExp){
+        log.info("前端传参{}", JSON.toJSONString(runExp));
+        testRunExpWithThreads(runExp);
+        return "done";
+    }
 
+    public static void testRunExpWithThreads(RunExp runExp) {
+
+        IFn initConfig = ClojureUtil.referClojureFn(cljDemo, "init-config");
+        initConfig.invoke(ClojureUtil.arem_all_interleavedFile);
+        double growth_rate_kt = Double.parseDouble(runExp.getGrowth_rate_k());
+        int cycle_sizet = Integer.parseInt(runExp.getCycle_size());
+        IFn runExpInvoke = ClojureUtil.referClojureFn(cljDemo, "run-exp-threads");
+        runExpInvoke.invoke(growth_rate_kt, Lists.newArrayList(cycle_sizet),runExp.getThreads_per_configuration(), runExp.getThreads_per_evaluation());
+    }
     @ResponseBody
     @RequestMapping(value = "runExp", method = {RequestMethod.POST, RequestMethod.GET})
     public Map<String, Object> runExp(@RequestBody RunExp runExp) {
@@ -52,7 +69,7 @@ public class ExpController {
 
     public static void testRunExp(double growth_rate_k, int cycle_size) {
         IFn initConfig = ClojureUtil.referClojureFn(cljDemo, "init-config");
-        initConfig.invoke("src/main/resources/arem_all_interleaved.csv");
+        initConfig.invoke(ClojureUtil.arem_all_interleavedFile);
 
         IFn runExp = ClojureUtil.referClojureFn(cljDemo, "run-exp");
         runExp.invoke(growth_rate_k, Lists.newArrayList(cycle_size));
@@ -60,10 +77,10 @@ public class ExpController {
 
     public static Map<String, Object> testRunDemo() {
         IFn initConfig = ClojureUtil.referClojureFn(cljDemo, "init-config");
-        initConfig.invoke("src/main/resources/arem_all_interleaved.csv");
+        initConfig.invoke(ClojureUtil.arem_all_interleavedFile);
 
         IFn makeData = ClojureUtil.referClojureFn(cljDemo, "make-data");
-        makeData.invoke("workspace/arem/logistic-cumulative.edn");
+        makeData.invoke(ClojureUtil.logisticFile);
 
         IFn getAccuracy = ClojureUtil.referClojureFn(cljDemo, "get-accuracy");
         Double accuracy = ((Ratio) getAccuracy.invoke()).doubleValue();
