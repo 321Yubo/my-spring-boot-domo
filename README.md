@@ -10,7 +10,7 @@
  2、构建Java WEB 服务
 并生产jar包(demo-0.0.1-SNAPSHOT.jar)
 ```
-   mvn package -DskipTests=true package
+   mvn  -DskipTests=true package
    ```
    或
 
