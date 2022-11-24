@@ -1,26 +1,26 @@
-# 简介
-基于spring boot 的一个简单的Java WEB付，集成了一些基本的简单功能。
+# Introduction
+Based on spring boot a simple Java WEB pay , integrated with some basic simple functions .
 
 ## Quickstart
-1、把ppdsp-0.1.0-SNAPSHOT-standalone.jar 导入maven仓库里
+1、Import ppdsp-0.1.0-SNAPSHOT-standalone.jar into the maven repository
  ```
  mvn install:install-file -Dfile="ppdsp-0.1.0-SNAPSHOT-standalone.jar" -DgroupId=com.ppdsp -DartifactId=noise.addition.variations -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar
 
  ```
- 2、构建Java WEB 服务
-并生产jar包(demo-0.0.1-SNAPSHOT.jar)
+ 2、Building Java WEB server
+And building jar(demo-0.0.1-SNAPSHOT.jar)
 ```
    mvn  -DskipTests=true package
    ```
-   或
+   or
 
-   idea 构建
-   Lifecycle -》package
+   idea build
+   Lifecycle =>package
    
    
- 3、 启动web 服务
+ 3、 Start web server
 
-   3.1 服务器
+   3.1 server
 
   
        ```
@@ -30,7 +30,7 @@
    3.2 
 idea
   
-运行
+run
 
 SpringBootDemoApplication
 ## Dependencies
